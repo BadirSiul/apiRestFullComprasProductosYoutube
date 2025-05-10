@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 
 class CompraController extends Controller
 {
-    public function index(){
-        # code
+    public function index()
+    {
+        
     }
 
     public function store(Request $request)
