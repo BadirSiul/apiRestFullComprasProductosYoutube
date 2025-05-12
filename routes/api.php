@@ -23,10 +23,10 @@ use App\Models\Categoria;
 //     return $request->user();
 // });
 
-Route::resource('marcas', MarcaController::class);
+Route::apiresource('marcas', MarcaController::class);
 Route::apiResource('categorias', CategoriaController::class);
-Route::resource('productos', ProductoController::class);
-//Route::resource('compras', CompraController::class);
+Route::apiresource('productos', ProductoController::class);
+Route::apiresource('compras', CompraController::class);
 
 Route::get('categorias/{categoria}/productos', [CategoriaController::class, 'productosPorCategoria']);
 Route::get('marcas/{marca}/productos', [MarcaController::class, 'productosPorMarca']);
