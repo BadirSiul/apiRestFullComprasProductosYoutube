@@ -6,6 +6,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CompraController;
+use App\Models\Categoria;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,6 @@ Route::resource('marcas', MarcaController::class);
 Route::apiResource('categorias', CategoriaController::class);
 Route::resource('productos', ProductoController::class);
 //Route::resource('compras', CompraController::class);
+
+Route::get('categorias/{categoria}/productos', [CategoriaController::class, 'productosPorCategoria']);
+Route::get('marcas/{marca}/productos', [MarcaController::class, 'productosPorMarca']);

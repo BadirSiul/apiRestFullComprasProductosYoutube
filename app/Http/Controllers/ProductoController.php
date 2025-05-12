@@ -17,7 +17,7 @@ class ProductoController extends Controller
         try {
             // Todo el codigo Funciona Bien.
             //todo el codigo inicial.
-            $productos = Producto::all(); // message statuscode error data
+            $productos = Producto::with('marca','categoria')->get(); // message statuscode error data
             return Apiresponse::success('Productos obtenidos', 200, $productos);
         } catch (Exception $e) {
             return ApiResponse::error('Ocurrio un error al obtener los productos: ' . $e->getMessage(), 500);
@@ -55,7 +55,7 @@ class ProductoController extends Controller
     public function show($id)
     {
         try {
-            $producto = Producto::findOrfail($id);
+            $producto = Producto::with('marca','categoria')->findOrFail($id);
             return ApiResponse::success('Producto obtenido exitosamente', 200, $producto);
         }catch(ModelNotFoundException $e){
             return ApiResponse::error('¡Producto no encontrado!', 404);
@@ -102,6 +102,16 @@ class ProductoController extends Controller
 
     public function destroy($id)
     {
-        # code
+        try {
+            $producto = Producto::findOrFail($id);
+            $producto->delete();
+            return ApiResponse::success('Producto eliminado exitosamente', 200);
+        } catch (ModelNotFoundException $e) {
+            return ApiResponse::error('¡Producto no encontrado!', 404);
+        } catch (Exception $e) {
+            return ApiResponse::error('Ocurrio un error al eliminar el producto: ' . $e->getMessage(), 500);
+        }
     }
+
+    
 }
